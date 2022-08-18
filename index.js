@@ -46,13 +46,13 @@ app.post(
     try {
       new URL(req.body.url);
     } catch (error) {
-      return res.json({ error: "Invalid URL" });
+      return res.json({ error: "invalid url" });
     }
     //Validate Host
     const url = new URL(req.body.url);
     dns.lookup(url.hostname, (error, addres, family) => {
       if (error?.code == "ENOTFOUND") {
-        return res.json({ error: "Invalid Hostname" });
+        return res.json({ error: "invalid url" });
       }
       // Validate if already exist de url on DB
       Url.findOne({ original_url: url.href }).exec((error, result) => {
